@@ -1,0 +1,23 @@
+{
+    "name": "Steam Relay Rust Dev",
+    "build": {
+      "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": ["rust-lang.rust-analyzer", "tamasfe.even-better-toml"]
+      }
+    },
+    "containerEnv": {
+      // Rust 빌드 결과물 경로를 라이브러리 탐색 경로에 추가
+      "LD_LIBRARY_PATH": "/workspaces/${localWorkspaceFolderBasename}/target/debug:${containerEnv:LD_LIBRARY_PATH}"
+    },
+    "features": {
+      "ghcr.io/devcontainers/features/common-utils:1": {}
+    },
+    // Windows 환경에서는 호스트 네트워크 모드를 사용하는 것이 통신에 가장 유리합니다.
+    "runArgs": [
+      "--network=host"
+    ],
+    "remoteUser": "vscode"
+  }
